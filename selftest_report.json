@@ -1,0 +1,92 @@
+{
+  "run_id": "run_f78c9081b12f43ee",
+  "results": [
+    {
+      "property": "question_independence",
+      "injected_bias": 0.0,
+      "threshold": 0.056,
+      "expected_violation": false,
+      "detected_violation": false,
+      "correct": true,
+      "max_effect_observed": 0.01,
+      "magnitude_recovered": null
+    },
+    {
+      "property": "question_independence",
+      "injected_bias": 0.01,
+      "threshold": 0.056,
+      "expected_violation": false,
+      "detected_violation": false,
+      "correct": true,
+      "max_effect_observed": 0.02,
+      "magnitude_recovered": null
+    },
+    {
+      "property": "question_independence",
+      "injected_bias": 0.15,
+      "threshold": 0.056,
+      "expected_violation": true,
+      "detected_violation": true,
+      "correct": true,
+      "max_effect_observed": 0.14,
+      "magnitude_recovered": true
+    },
+    {
+      "property": "question_independence",
+      "injected_bias": 0.4,
+      "threshold": 0.056,
+      "expected_violation": true,
+      "detected_violation": true,
+      "correct": true,
+      "max_effect_observed": 0.4,
+      "magnitude_recovered": true
+    },
+    {
+      "property": "choice_order_invariance",
+      "injected_bias": 0.0,
+      "threshold": 0.052,
+      "expected_violation": false,
+      "detected_violation": false,
+      "correct": true,
+      "max_effect_observed": 0.0
+    },
+    {
+      "property": "choice_order_invariance",
+      "injected_bias": 0.02,
+      "threshold": 0.052,
+      "expected_violation": false,
+      "detected_violation": false,
+      "correct": true,
+      "max_effect_observed": 0.02
+    },
+    {
+      "property": "choice_order_invariance",
+      "injected_bias": 0.2,
+      "threshold": 0.052,
+      "expected_violation": true,
+      "detected_violation": true,
+      "correct": true,
+      "max_effect_observed": 0.2
+    },
+    {
+      "property": "choice_order_invariance",
+      "injected_bias": 0.5,
+      "threshold": 0.052,
+      "expected_violation": true,
+      "detected_violation": true,
+      "correct": true,
+      "max_effect_observed": 0.5
+    }
+  ],
+  "summary": {
+    "checks": 8,
+    "passed": 8,
+    "failed": 0,
+    "harness_trustworthy": true
+  },
+  "integrity": {
+    "checked": 666,
+    "mismatches": [],
+    "intact": true
+  }
+}

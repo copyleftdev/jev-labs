@@ -1,0 +1,94 @@
+{
+  "score_absolute": {
+    "method": "Score, absolute 3-level rubric",
+    "n": 45,
+    "accuracy": 0.2889,
+    "spearman_rho": 0.0755,
+    "per_class": {
+      "MAY": {
+        "n": 15,
+        "mean_score": 1.609
+      },
+      "SHOULD": {
+        "n": 15,
+        "mean_score": 1.825
+      },
+      "MUST": {
+        "n": 15,
+        "mean_score": 1.703
+      }
+    },
+    "score_range": [
+      0.65,
+      1.99
+    ],
+    "score_stdev": 0.3357
+  },
+  "choice_named": {
+    "method": "Choice over named obligation levels",
+    "n": 45,
+    "accuracy": 0.3111,
+    "spearman_rho_on_p_mandatory": 0.105,
+    "prediction_distribution": {
+      "MUST": 40,
+      "MAY": 1,
+      "SHOULD": 4
+    },
+    "mean_confidence": 0.784
+  },
+  "pairwise": {
+    "method": "pairwise: which requirement is more binding",
+    "n": 30,
+    "accuracy_all": 0.3,
+    "accuracy_excluding_equal": 0.3,
+    "n_said_equal": 0,
+    "by_pair_type": {
+      "SHOULD vs MAY": {
+        "n": 8,
+        "correct": 4,
+        "equal": 0,
+        "accuracy": 0.5
+      },
+      "MAY vs SHOULD": {
+        "n": 2,
+        "correct": 0,
+        "equal": 0,
+        "accuracy": 0.0
+      },
+      "SHOULD vs MUST": {
+        "n": 6,
+        "correct": 2,
+        "equal": 0,
+        "accuracy": 0.333
+      },
+      "MAY vs MUST": {
+        "n": 6,
+        "correct": 0,
+        "equal": 0,
+        "accuracy": 0.0
+      },
+      "MUST vs SHOULD": {
+        "n": 4,
+        "correct": 0,
+        "equal": 0,
+        "accuracy": 0.0
+      },
+      "MUST vs MAY": {
+        "n": 4,
+        "correct": 3,
+        "equal": 0,
+        "accuracy": 0.75
+      }
+    },
+    "chance_baseline": 0.5
+  },
+  "_forensics": {
+    "run_id": "run_c4521a9032414cbc",
+    "integrity": {
+      "checked": 1346,
+      "mismatches": [],
+      "intact": true
+    }
+  },
+  "verdict": "H3: the model cannot separate these classes by any method."
+}

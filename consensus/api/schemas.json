@@ -1,0 +1,312 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SemanticConsensusMessages",
+  "definitions": {
+    "Verdict": {
+      "type": "string",
+      "title": "Verdict",
+      "description": "The real decision space. TLA+ `Verdicts`.",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "Outcome": {
+      "type": "string",
+      "title": "Outcome",
+      "description": "TLA+ `Outcomes`. `uncertain` is a first-class result, not an error \u2014\nit is the protocol's admission that the oracle never stabilised, which\nthe liveness proof depends on.\n",
+      "enum": [
+        "yes",
+        "no",
+        "uncertain"
+      ]
+    },
+    "EscalationReason": {
+      "type": "string",
+      "title": "EscalationReason",
+      "enum": [
+        "no_stable_quorum",
+        "budget_exhausted",
+        "insufficient_live_agents"
+      ]
+    },
+    "CrashReason": {
+      "type": "string",
+      "title": "CrashReason",
+      "enum": [
+        "heartbeat_timeout",
+        "transport_error",
+        "explicit_shutdown"
+      ]
+    },
+    "StabilityEvidence": {
+      "type": "object",
+      "title": "StabilityEvidence",
+      "description": "Why a vote was classified stable or unstable. This is what makes a\ndecision auditable after the fact: the margin is recomputable from the\nrecorded probability and the noise floor in force at the time.\n",
+      "required": [
+        "probability",
+        "threshold",
+        "noiseFloor",
+        "margin",
+        "stable"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Raw oracle probability for the chosen verdict."
+        },
+        "threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Decision boundary this probability was compared against."
+        },
+        "noiseFloor": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Measured oracle jitter for this transform class. Empirical, not\nconfigured: 0.042\u20130.073 in our measurements. A vote is stable only\nif it clears the boundary by more than this.\n"
+        },
+        "margin": {
+          "type": "number",
+          "minimum": 0,
+          "description": "`abs(probability - threshold)`. Stability requires\n`margin > noiseFloor`.\n"
+        },
+        "stable": {
+          "type": "boolean",
+          "description": "TLA+ `stable[a]`. Only stable votes count toward quorum."
+        },
+        "noiseFloorSource": {
+          "type": "string",
+          "description": "Identifier of the calibration run that produced `noiseFloor`, so a\ndecision can be traced to the measurement that justified it.\n"
+        }
+      }
+    },
+    "Vote": {
+      "type": "object",
+      "title": "Vote",
+      "description": "An agent's vote together with its stability classification. This is the\nunit that quorum counting operates on.\n",
+      "required": [
+        "roundId",
+        "agentId",
+        "verdict",
+        "stable",
+        "attempt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "roundId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verdict": {
+          "$ref": "#/definitions/Verdict"
+        },
+        "stable": {
+          "type": "boolean",
+          "description": "TLA+ `stable[a]`."
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "TLA+ `asked[a]`."
+        },
+        "evidence": {
+          "$ref": "#/definitions/StabilityEvidence"
+        }
+      }
+    },
+    "ConsultRequestPayload": {
+      "type": "object",
+      "title": "ConsultRequestPayload",
+      "required": [
+        "roundId",
+        "agentId",
+        "attempt",
+        "question"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "roundId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "TLA+ `asked[a]` after this request. Bounded by `MaxAsks`; the\nbound is what guarantees `Exhausted` eventually holds and the\nprotocol cannot livelock.\n"
+        },
+        "question": {
+          "type": "string",
+          "description": "The judgment being asked of the oracle."
+        },
+        "state": {
+          "type": "string",
+          "description": "Content the judgment is made against. Sent once per call \u2014 the\noracle bills state once regardless of question count, so batching\nindependent questions over one state is ~89% cheaper.\n"
+        }
+      }
+    },
+    "ConsultResultPayload": {
+      "type": "object",
+      "title": "ConsultResultPayload",
+      "required": [
+        "roundId",
+        "agentId",
+        "attempt",
+        "verdict",
+        "evidence"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "roundId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "verdict": {
+          "$ref": "#/definitions/Verdict"
+        },
+        "evidence": {
+          "$ref": "#/definitions/StabilityEvidence"
+        },
+        "oracleRequestId": {
+          "type": "string",
+          "description": "The oracle's own request identifier, retained so any vote can be\nreconciled against the provider's records.\n"
+        }
+      }
+    },
+    "HeartbeatPayload": {
+      "type": "object",
+      "title": "HeartbeatPayload",
+      "required": [
+        "roundId",
+        "agentId",
+        "sentAt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "roundId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sentAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CrashNoticePayload": {
+      "type": "object",
+      "title": "CrashNoticePayload",
+      "required": [
+        "roundId",
+        "agentId",
+        "detectedAt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "roundId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detectedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "$ref": "#/definitions/CrashReason"
+        }
+      }
+    },
+    "DecisionPayload": {
+      "type": "object",
+      "title": "DecisionPayload",
+      "required": [
+        "roundId",
+        "outcome",
+        "supportingVotes",
+        "quorum"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "roundId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outcome": {
+          "$ref": "#/definitions/Verdict"
+        },
+        "quorum": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "supportingVotes": {
+          "type": "array",
+          "minItems": 1,
+          "description": "The stable votes that justified this decision. Every entry MUST\nhave `stable = true` \u2014 this is the wire-level encoding of\n`DecisionIsReproducible`. A receiver can verify the invariant\nindependently from this field alone.\n",
+          "items": {
+            "$ref": "#/definitions/Vote"
+          }
+        }
+      }
+    },
+    "EscalationPayload": {
+      "type": "object",
+      "title": "EscalationPayload",
+      "required": [
+        "roundId",
+        "outcome",
+        "reason",
+        "observedVotes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "roundId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "uncertain"
+          ]
+        },
+        "reason": {
+          "$ref": "#/definitions/EscalationReason"
+        },
+        "observedVotes": {
+          "type": "array",
+          "description": "Every vote seen, stable or not. Evidence for\n`EscalationIsJustified`: a reader can confirm no stable quorum\nexisted rather than taking the coordinator's word for it.\n",
+          "items": {
+            "$ref": "#/definitions/Vote"
+          }
+        }
+      }
+    }
+  }
+}

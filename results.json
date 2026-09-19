@@ -1,0 +1,197 @@
+{
+  "batching": {
+    "claim": "batching is cheaper/faster with no change in answers",
+    "n_questions": 8,
+    "batched_ms": 255,
+    "serial_ms": 1020,
+    "speedup": 4.0,
+    "batched_input_tokens": 487,
+    "serial_input_tokens": 3014,
+    "token_ratio": 6.19,
+    "batched_answers": {
+      "is_regulation": 0.99,
+      "mentions_deadline": 0.99,
+      "mentions_fines": 0.99,
+      "mentions_scope": 0.96,
+      "mentions_date": 0.99,
+      "mentions_controllers": 0.99,
+      "mentions_consent": 0.03,
+      "mentions_dpo": 0.02
+    },
+    "serial_answers": {
+      "is_regulation": 0.99,
+      "mentions_deadline": 0.99,
+      "mentions_fines": 0.99,
+      "mentions_scope": 0.96,
+      "mentions_date": 0.99,
+      "mentions_controllers": 0.99,
+      "mentions_consent": 0.03,
+      "mentions_dpo": 0.01
+    },
+    "answer_drift": {
+      "mentions_dpo": 0.01
+    },
+    "answers_identical": false
+  },
+  "invariants": {
+    "claim": "structural invariants are not guaranteed (docs predict divergence)",
+    "primitive_disagreement": {
+      "ticket": "I'm not happy with the fit. What are my options here?",
+      "noul": 0.21,
+      "choice_yes": 0.02,
+      "choice_no": 0.98,
+      "choice_confidence": 0.97,
+      "gap_noul_vs_choice_yes": 0.19
+    },
+    "negation_sum": {
+      "ticket": "I was charged twice for the same order. Can someone look into this?",
+      "refund": 0.71,
+      "not_refund": 0.42,
+      "sum": 1.13,
+      "deviation_from_1": 0.13
+    }
+  },
+  "counting": {
+    "claim": "counting in one question is unreliable; per-item decomposition works",
+    "items": [
+      "typesafe",
+      "apple",
+      "california",
+      "banana",
+      "likes",
+      "calibration",
+      "orange",
+      "vertex",
+      "kiwi",
+      "postgres"
+    ],
+    "ground_truth_count": 4,
+    "direct_count": 4,
+    "direct_correct": true,
+    "direct_confidence": 0.7,
+    "decomposed_count": 4,
+    "decomposed_correct": true,
+    "per_item_nouls": {
+      "typesafe": 0.01,
+      "apple": 0.99,
+      "california": 0.01,
+      "banana": 0.99,
+      "likes": 0.01,
+      "calibration": 0.02,
+      "orange": 0.98,
+      "vertex": 0.02,
+      "kiwi": 0.98,
+      "postgres": 0.02
+    },
+    "misclassified": []
+  },
+  "confidence": {
+    "claim": "confidence drops on ambiguous input",
+    "cases": {
+      "unambiguous_technical": {
+        "choice": "technical",
+        "confidence": 1.0,
+        "probabilities": {
+          "sales": 0.0,
+          "billing": 0.0,
+          "technical": 1.0
+        }
+      },
+      "unambiguous_billing": {
+        "choice": "billing",
+        "confidence": 1.0,
+        "probabilities": {
+          "technical": 0.0,
+          "sales": 0.0,
+          "billing": 1.0
+        }
+      },
+      "ambiguous_mixed": {
+        "choice": "billing",
+        "confidence": 0.56,
+        "probabilities": {
+          "sales": 0.01,
+          "technical": 0.29,
+          "billing": 0.7
+        }
+      },
+      "contentless": {
+        "choice": "technical",
+        "confidence": 0.85,
+        "probabilities": {
+          "billing": 0.0,
+          "technical": 0.9,
+          "sales": 0.1
+        }
+      }
+    },
+    "mean_confidence_clear": 1.0,
+    "mean_confidence_ambiguous": 0.705,
+    "separates_correctly": true
+  },
+  "determinism": {
+    "claim": "identical requests return identical answers (determinism)",
+    "repeats": 5,
+    "samples": {
+      "is_regulation": [
+        0.99,
+        0.99,
+        0.99,
+        0.99,
+        0.99
+      ],
+      "mentions_consent": [
+        0.03,
+        0.03,
+        0.03,
+        0.04,
+        0.04
+      ],
+      "severity": [
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "topic": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "spreads": {
+      "is_regulation": 0.0,
+      "mentions_consent": 0.01,
+      "severity": 0.0,
+      "topic": 0.0
+    },
+    "max_spread": 0.01,
+    "fully_deterministic": false
+  },
+  "_forensics": {
+    "run_id": "run_16fcc5135afb4865",
+    "db_path": "/home/ops/Project/jev-labs/forensics.db",
+    "integrity": {
+      "checked": 39,
+      "mismatches": [],
+      "intact": true
+    },
+    "cost": [
+      {
+        "run_id": "run_16fcc5135afb4865",
+        "label": "claim_verification",
+        "calls": 22,
+        "questions": 55,
+        "input_tokens": 9069,
+        "output_tokens": 1325,
+        "total_latency_ms": 3156.8,
+        "mean_latency_ms": 143.5,
+        "mean_upstream_ms": 99.5,
+        "failures": 0
+      }
+    ]
+  }
+}

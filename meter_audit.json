@@ -1,0 +1,132 @@
+{
+  "m1_determinism": {
+    "property": "M1 identical request bills identically",
+    "repeats": 6,
+    "token_counts": [
+      291,
+      291,
+      291,
+      291,
+      291,
+      291
+    ],
+    "distinct": 1,
+    "deterministic": true
+  },
+  "m2_m3_linearity": {
+    "property": "M2/M3 tokens are affine in payload size",
+    "measurements": [
+      {
+        "filler_mult": 0,
+        "state_chars": 48,
+        "input_tokens": 288
+      },
+      {
+        "filler_mult": 1,
+        "state_chars": 167,
+        "input_tokens": 306
+      },
+      {
+        "filler_mult": 2,
+        "state_chars": 286,
+        "input_tokens": 324
+      },
+      {
+        "filler_mult": 4,
+        "state_chars": 524,
+        "input_tokens": 360
+      },
+      {
+        "filler_mult": 8,
+        "state_chars": 1000,
+        "input_tokens": 432
+      },
+      {
+        "filler_mult": 16,
+        "state_chars": 1952,
+        "input_tokens": 576
+      },
+      {
+        "filler_mult": 32,
+        "state_chars": 3856,
+        "input_tokens": 864
+      },
+      {
+        "filler_mult": 64,
+        "state_chars": 7664,
+        "input_tokens": 1440
+      }
+    ],
+    "chars_per_token": 6.611,
+    "tokens_per_char": 0.15126,
+    "fixed_overhead_tokens": 280.7,
+    "residual_stdev_tokens": 0.0,
+    "rate_small_payloads": 0.15126,
+    "rate_large_payloads": 0.15126,
+    "superlinear": false,
+    "linear_within_tolerance": true
+  },
+  "m4_additivity": {
+    "property": "M4 state billed once per call, not once per question",
+    "state_chars": 1000,
+    "measurements": [
+      {
+        "n_questions": 1,
+        "input_tokens": 439
+      },
+      {
+        "n_questions": 2,
+        "input_tokens": 458
+      },
+      {
+        "n_questions": 4,
+        "input_tokens": 496
+      },
+      {
+        "n_questions": 8,
+        "input_tokens": 572
+      },
+      {
+        "n_questions": 16,
+        "input_tokens": 730
+      }
+    ],
+    "marginal_tokens_per_question": 19.4,
+    "intercept_tokens": 418.8,
+    "tokens_1q": 439,
+    "tokens_16q": 730,
+    "actual_growth_factor": 1.663,
+    "growth_if_state_rebilled": 16.0,
+    "state_billed_once": true,
+    "savings_vs_16_separate_calls": 6294,
+    "savings_pct": 89.6
+  },
+  "m5_floor": {
+    "property": "M5 minimum billable call",
+    "cases": {
+      "minimal": {
+        "payload_chars": 9,
+        "input_tokens": 277,
+        "cost_usd_at_list": 1.1634e-05
+      },
+      "short_string_state": {
+        "payload_chars": 3,
+        "input_tokens": 271,
+        "cost_usd_at_list": 1.1382e-05
+      },
+      "typical_small": {
+        "payload_chars": 27,
+        "input_tokens": 283,
+        "cost_usd_at_list": 1.1886e-05
+      }
+    }
+  },
+  "_forensics": {
+    "run_id": "run_bfe9bafc871a4c9f",
+    "integrity": {
+      "checked": 1428,
+      "mismatches": [],
+      "intact": true
+    }
+  }
+}

@@ -1,0 +1,2051 @@
+{
+ "generated_from": {
+  "none": 560,
+  "realistic": 560,
+  "severe": 560
+ },
+ "forensics": {
+  "captured_calls": 1490,
+  "captured_answers": 2481,
+  "note": "every call hash-verified, stored verbatim"
+ },
+ "safety_by_chaos": {
+  "none": {
+   "golden_rounds": 360,
+   "correct": 360,
+   "escalated": 0,
+   "violations": 0,
+   "accuracy_ci": [
+    0.9894,
+    1.0
+   ]
+  },
+  "realistic": {
+   "golden_rounds": 360,
+   "correct": 360,
+   "escalated": 0,
+   "violations": 0,
+   "accuracy_ci": [
+    0.9894,
+    1.0
+   ]
+  },
+  "severe": {
+   "golden_rounds": 360,
+   "correct": 314,
+   "escalated": 46,
+   "violations": 0,
+   "accuracy_ci": [
+    0.8338,
+    0.9028
+   ]
+  }
+ },
+ "headline": {
+  "total_rounds": 1680,
+  "total_golden": 1080,
+  "total_violations": 0,
+  "violation_rate_upper_95": 0.00278,
+  "total_votes": 5007,
+  "total_oracle_calls": 5214
+ },
+ "gate": {
+  "total_votes": 5007,
+  "stable": 4931,
+  "excluded": 76,
+  "max_excluded_margin": 0.04,
+  "min_included_margin": 0.05,
+  "noise_floor": 0.042,
+  "sample": [
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.26,
+    "s": true
+   },
+   {
+    "m": 0.07,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.09,
+    "s": true
+   },
+   {
+    "m": 0.16,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.44,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.21,
+    "s": true
+   },
+   {
+    "m": 0.14,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.23,
+    "s": true
+   },
+   {
+    "m": 0.13,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.43,
+    "s": true
+   },
+   {
+    "m": 0.2,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.22,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.37,
+    "s": true
+   },
+   {
+    "m": 0.06,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.44,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.24,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.38,
+    "s": true
+   },
+   {
+    "m": 0.11,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.27,
+    "s": true
+   },
+   {
+    "m": 0.06,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.31,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.25,
+    "s": true
+   },
+   {
+    "m": 0.19,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.44,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.27,
+    "s": true
+   },
+   {
+    "m": 0.08,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.14,
+    "s": true
+   },
+   {
+    "m": 0.11,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.41,
+    "s": true
+   },
+   {
+    "m": 0.15,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.31,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.27,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.38,
+    "s": true
+   },
+   {
+    "m": 0.05,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.44,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.37,
+    "s": true
+   },
+   {
+    "m": 0.08,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.43,
+    "s": true
+   },
+   {
+    "m": 0.19,
+    "s": true
+   },
+   {
+    "m": 0.18,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.15,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.22,
+    "s": true
+   },
+   {
+    "m": 0.04,
+    "s": false
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.26,
+    "s": true
+   },
+   {
+    "m": 0.15,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.12,
+    "s": true
+   },
+   {
+    "m": 0.09,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.28,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.41,
+    "s": true
+   },
+   {
+    "m": 0.1,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.14,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.37,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.15,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.22,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.12,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.41,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.43,
+    "s": true
+   },
+   {
+    "m": 0.06,
+    "s": true
+   },
+   {
+    "m": 0.1,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.24,
+    "s": true
+   },
+   {
+    "m": 0.06,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.16,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.33,
+    "s": true
+   },
+   {
+    "m": 0.11,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.41,
+    "s": true
+   },
+   {
+    "m": 0.11,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.26,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.24,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.26,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.34,
+    "s": true
+   },
+   {
+    "m": 0.07,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.25,
+    "s": true
+   },
+   {
+    "m": 0.18,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.25,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.29,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.14,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.29,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.33,
+    "s": true
+   },
+   {
+    "m": 0.12,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.43,
+    "s": true
+   },
+   {
+    "m": 0.17,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.22,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.25,
+    "s": true
+   },
+   {
+    "m": 0.08,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.43,
+    "s": true
+   },
+   {
+    "m": 0.17,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.23,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.11,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.43,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.38,
+    "s": true
+   },
+   {
+    "m": 0.15,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.23,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.44,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.33,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.41,
+    "s": true
+   },
+   {
+    "m": 0.16,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.38,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.31,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.43,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.38,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.44,
+    "s": true
+   },
+   {
+    "m": 0.29,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.29,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.35,
+    "s": true
+   },
+   {
+    "m": 0.1,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.37,
+    "s": true
+   },
+   {
+    "m": 0.11,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.39,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.28,
+    "s": true
+   },
+   {
+    "m": 0.1,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.17,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.21,
+    "s": true
+   },
+   {
+    "m": 0.3,
+    "s": true
+   },
+   {
+    "m": 0.08,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.44,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.24,
+    "s": true
+   },
+   {
+    "m": 0.31,
+    "s": true
+   },
+   {
+    "m": 0.17,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.23,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.05,
+    "s": true
+   },
+   {
+    "m": 0.03,
+    "s": false
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.44,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.41,
+    "s": true
+   },
+   {
+    "m": 0.1,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.22,
+    "s": true
+   },
+   {
+    "m": 0.03,
+    "s": false
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.27,
+    "s": true
+   },
+   {
+    "m": 0.12,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.4,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.4,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.43,
+    "s": true
+   },
+   {
+    "m": 0.26,
+    "s": true
+   },
+   {
+    "m": 0.05,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.35,
+    "s": true
+   },
+   {
+    "m": 0.13,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.14,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.32,
+    "s": true
+   },
+   {
+    "m": 0.08,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.06,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.4,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.44,
+    "s": true
+   },
+   {
+    "m": 0.4,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.33,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.21,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.49,
+    "s": true
+   },
+   {
+    "m": 0.28,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.42,
+    "s": true
+   },
+   {
+    "m": 0.23,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.46,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.45,
+    "s": true
+   },
+   {
+    "m": 0.47,
+    "s": true
+   },
+   {
+    "m": 0.48,
+    "s": true
+   }
+  ]
+ },
+ "honest": {
+  "mislabelled_by_us": {
+   "scenario": "ambiguous.pregnancy.unclear",
+   "what_we_asked": "Is pregnancy ruled out? (late period, declined testing, isotretinoin ordered)",
+   "what_we_labelled": "Escalate",
+   "what_jev_said": "No, consistently",
+   "verdict_on_us": "Jev was right. 'Not ruled out' is the correct answer and is the trigger for the hold. Relabelled to nuanced.pregnancy.not_ruled_out, expected No.",
+   "data": {
+    "n": 120,
+    "escalated": 5,
+    "verdicts": {
+     "No": 115,
+     "None": 5
+    },
+    "p_mean": 0.033,
+    "p_min": 0.01,
+    "p_max": 0.18
+   }
+  },
+  "real_limitation": {
+   "scenario": "ambiguous.allergy.vague_note",
+   "record": "'reaction to antibiotics as a child, details unknown, mother reported stomach upset' + amoxicillin",
+   "verdict_on_jev": "Genuinely underdetermined. It escalated most of the time, but decided in a minority of rounds and split both ways when it did. The stability gate is not a substitute for an answerability check.",
+   "data": {
+    "n": 120,
+    "escalated": 86,
+    "verdicts": {
+     "None": 86,
+     "Yes": 25,
+     "No": 9
+    },
+    "p_mean": 0.521,
+    "p_min": 0.18,
+    "p_max": 0.7
+   }
+  }
+ },
+ "moments": {
+  "clean_decision": {
+   "scenario": "golden.controlled.oxycodone",
+   "verdict": "Yes",
+   "votes": [
+    {
+     "agent": "rx1",
+     "p": 0.98,
+     "margin": 0.48
+    },
+    {
+     "agent": "rx2",
+     "p": 0.99,
+     "margin": 0.49
+    },
+    {
+     "agent": "rx5",
+     "p": 0.98,
+     "margin": 0.48
+    }
+   ],
+   "request_ids": [
+    "req_01a0b845ddce7881a7a0b6b8a6969e12",
+    "req_01a0b845deb174e7b72ca11f3d1aac9d",
+    "req_01a0b845df887ef1900c6b5f06b68838"
+   ],
+   "elapsed_ms": 682
+  },
+  "declined_under_chaos": {
+   "scenario": "golden.allergy.penicillin_conflict",
+   "seed": 90001,
+   "chaos": "severe",
+   "expected": "Yes",
+   "votes": [
+    {
+     "agent": "rx4",
+     "p": 0.98,
+     "margin": 0.48,
+     "stable": true
+    },
+    {
+     "agent": "rx5",
+     "p": 0.96,
+     "margin": 0.45999999999999996,
+     "stable": true
+    },
+    {
+     "agent": "rx3",
+     "p": 0.54,
+     "margin": 0.040000000000000036,
+     "stable": false
+    }
+   ],
+   "oracle_failures": [
+    [
+     "rx1",
+     "rate limited"
+    ],
+    [
+     "rx1",
+     "transport error: injected chaos"
+    ],
+    [
+     "rx3",
+     "rate limited"
+    ]
+   ],
+   "replay": "--base-seed 90001 --seeds 1 --chaos severe"
+  },
+  "degraded_but_decided": {
+   "scenario": "golden.controlled.oxycodone",
+   "seed": 90011,
+   "chaos": "severe",
+   "verdict": "Yes",
+   "lost_agents": [
+    [
+     "rx5",
+     "rate limited"
+    ],
+    [
+     "rx2",
+     "transport error: injected chaos"
+    ],
+    [
+     "rx3",
+     "transport error: injected chaos"
+    ]
+   ],
+   "surviving_votes": [
+    {
+     "agent": "rx5",
+     "p": 0.99,
+     "margin": 0.49
+    },
+    {
+     "agent": "rx4",
+     "p": 0.98,
+     "margin": 0.48
+    },
+    {
+     "agent": "rx1",
+     "p": 0.97,
+     "margin": 0.47
+    }
+   ]
+  },
+  "ambiguous_escalated": {
+   "scenario": "ambiguous.allergy.vague_note",
+   "seed": 90000,
+   "votes": [
+    {
+     "agent": "rx1",
+     "p": 0.43,
+     "margin": 0.07,
+     "stable": true
+    },
+    {
+     "agent": "rx4",
+     "p": 0.51,
+     "margin": 0.010000000000000009,
+     "stable": false
+    },
+    {
+     "agent": "rx5",
+     "p": 0.39,
+     "margin": 0.10999999999999999,
+     "stable": true
+    },
+    {
+     "agent": "rx2",
+     "p": 0.61,
+     "margin": 0.10999999999999999,
+     "stable": true
+    },
+    {
+     "agent": "rx3",
+     "p": 0.67,
+     "margin": 0.17000000000000004,
+     "stable": true
+    }
+   ]
+  }
+ },
+ "paraphrase_audit": {
+  "violations_after_fix": 0,
+  "sets_checked": [
+   "controlled_substance",
+   "allergy_conflict",
+   "pregnancy_ruled_out"
+  ]
+ },
+ "escalation_by_chaos": {
+  "none": {
+   "n": 560,
+   "escalated": 28,
+   "rate": 0.05,
+   "ci": [
+    0.0348,
+    0.0713
+   ]
+  },
+  "realistic": {
+   "n": 560,
+   "escalated": 27,
+   "rate": 0.0482,
+   "ci": [
+    0.0333,
+    0.0692
+   ]
+  },
+  "severe": {
+   "n": 560,
+   "escalated": 101,
+   "rate": 0.1804,
+   "ci": [
+    0.1507,
+    0.2143
+   ]
+  }
+ },
+ "scenarios": {
+  "golden.controlled.oxycodone": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 0,
+   "tier": "Golden"
+  },
+  "golden.controlled.amoxicillin": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 0,
+   "tier": "Golden"
+  },
+  "golden.controlled.fentanyl": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 0,
+   "tier": "Golden"
+  },
+  "golden.controlled.lisinopril": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 0,
+   "tier": "Golden"
+  },
+  "golden.allergy.penicillin_conflict": {
+   "n": 120,
+   "decided": 114,
+   "escalated": 6,
+   "wrong": 0,
+   "tier": "Golden"
+  },
+  "golden.allergy.no_conflict": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 0,
+   "tier": "Golden"
+  },
+  "golden.allergy.nkda": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 0,
+   "tier": "Golden"
+  },
+  "golden.pregnancy.documented": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 0,
+   "tier": "Golden"
+  },
+  "golden.pregnancy.absent": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 0,
+   "tier": "Golden"
+  },
+  "nuanced.duplicate.same_class": {
+   "n": 120,
+   "decided": 114,
+   "escalated": 6,
+   "wrong": 0,
+   "tier": "Nuanced"
+  },
+  "nuanced.duplicate.different_class": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 0,
+   "tier": "Nuanced"
+  },
+  "nuanced.allergy.cross_class": {
+   "n": 120,
+   "decided": 112,
+   "escalated": 8,
+   "wrong": 0,
+   "tier": "Nuanced"
+  },
+  "ambiguous.allergy.vague_note": {
+   "n": 120,
+   "decided": 34,
+   "escalated": 86,
+   "wrong": 34,
+   "tier": "Ambiguous"
+  },
+  "ambiguous.pregnancy.unclear": {
+   "n": 120,
+   "decided": 115,
+   "escalated": 5,
+   "wrong": 115,
+   "tier": "Ambiguous"
+  }
+ }
+}

@@ -1,0 +1,20 @@
+{
+  "unmasked": {
+    "accuracy": 0.9,
+    "rho": 0.908,
+    "per_class_mean": {
+      "MAY": 0.272,
+      "SHOULD": 1.154,
+      "MUST": 1.98
+    }
+  },
+  "masked": {
+    "accuracy": 0.3667,
+    "rho": 0.2244,
+    "per_class_mean": {
+      "MAY": 1.586,
+      "SHOULD": 1.723,
+      "MUST": 1.825
+    }
+  }
+}

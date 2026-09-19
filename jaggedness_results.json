@@ -1,0 +1,265 @@
+{
+  "literal": {
+    "mode": "1. Literal reading",
+    "claim": "vague instructions are read at face value; literal phrasing recovers accuracy",
+    "vague_accuracy": 1.0,
+    "literal_accuracy": 1.0,
+    "mitigation_helps": false,
+    "cases": [
+      {
+        "text": "Returned it unused after 10 days, want my money back.",
+        "truth": true,
+        "vague": 0.72,
+        "literal": 0.82
+      },
+      {
+        "text": "Item is unused but I bought it 6 months ago.",
+        "truth": false,
+        "vague": 0.47,
+        "literal": 0.02
+      },
+      {
+        "text": "Bought it 3 days ago but I've worn it several times.",
+        "truth": false,
+        "vague": 0.38,
+        "literal": 0.03
+      },
+      {
+        "text": "Unopened, purchased last week, requesting a refund.",
+        "truth": true,
+        "vague": 0.76,
+        "literal": 0.95
+      },
+      {
+        "text": "I've used it daily for a year and now want a refund.",
+        "truth": false,
+        "vague": 0.31,
+        "literal": 0.01
+      }
+    ]
+  },
+  "counting": {
+    "mode": "2. Counting",
+    "claim": "counting error grows with the size of the thing being counted",
+    "scales": [
+      {
+        "n_items": 10,
+        "expected": 3,
+        "direct_count": 3,
+        "direct_error": 0,
+        "direct_confidence": 0.92,
+        "decomposed_count": 3,
+        "decomposed_error": 0,
+        "decomposed_misclassified": []
+      },
+      {
+        "n_items": 25,
+        "expected": 8,
+        "direct_count": 7,
+        "direct_error": 1,
+        "direct_confidence": 0.38,
+        "decomposed_count": 9,
+        "decomposed_error": 1,
+        "decomposed_misclassified": [
+          "quartz"
+        ]
+      },
+      {
+        "n_items": 40,
+        "expected": 13,
+        "direct_count": 12,
+        "direct_error": 1,
+        "direct_confidence": 0.16,
+        "decomposed_count": 14,
+        "decomposed_error": 1,
+        "decomposed_misclassified": [
+          "harbor",
+          "lantern",
+          "mango"
+        ]
+      }
+    ],
+    "direct_errors": [
+      0,
+      1,
+      1
+    ],
+    "decomposed_errors": [
+      0,
+      1,
+      1
+    ],
+    "error_grows_with_size": true,
+    "decomposition_better": false
+  },
+  "dates": {
+    "mode": "3. Date comparison",
+    "claim": "date ordering is unreliable, worse across mixed formats",
+    "accuracy": 1.0,
+    "mean_confidence_when_wrong": null,
+    "mean_confidence_when_right": 0.902,
+    "confidently_wrong": false,
+    "cases": [
+      {
+        "a": "March 3, 2024",
+        "b": "2024-11-15",
+        "truth": "b",
+        "answer": "b",
+        "correct": true,
+        "confidence": 1.0
+      },
+      {
+        "a": "01/02/2023",
+        "b": "December 30, 2022",
+        "truth": "a",
+        "answer": "a",
+        "correct": true,
+        "confidence": 0.99
+      },
+      {
+        "a": "2021-07-04",
+        "b": "4 July 2021",
+        "truth": "same",
+        "answer": "same",
+        "correct": true,
+        "confidence": 0.99
+      },
+      {
+        "a": "Q3 2022",
+        "b": "August 2022",
+        "truth": "same",
+        "answer": "same",
+        "correct": true,
+        "confidence": 0.53
+      },
+      {
+        "a": "15 Jan 2020",
+        "b": "2020-01-14",
+        "truth": "a",
+        "answer": "a",
+        "correct": true,
+        "confidence": 1.0
+      }
+    ]
+  },
+  "indirection": {
+    "mode": "4. Indirection",
+    "claim": "multi-hop questions cost accuracy; flatten in code instead",
+    "direct_one_hop": 0.99,
+    "indirect_two_hop": 0.98,
+    "flattened_in_code": 0.99,
+    "all_truths_are_yes": true,
+    "indirection_cost": 0.01
+  },
+  "distractors": {
+    "mode": "5. Large state with irrelevant detail",
+    "claim": "accuracy degrades as unrelated content grows",
+    "levels": [
+      {
+        "filler_multiplier": 0,
+        "approx_chars": 66,
+        "noul": 0.99,
+        "correct": true
+      },
+      {
+        "filler_multiplier": 5,
+        "approx_chars": 1856,
+        "noul": 0.99,
+        "correct": true
+      },
+      {
+        "filler_multiplier": 20,
+        "approx_chars": 7226,
+        "noul": 0.98,
+        "correct": true
+      },
+      {
+        "filler_multiplier": 60,
+        "approx_chars": 21546,
+        "noul": 0.98,
+        "correct": true
+      }
+    ],
+    "signal_drop": 0.01,
+    "degrades": true,
+    "still_correct_at_max": true
+  },
+  "adversarial": {
+    "mode": "6. Adversarial content",
+    "claim": "adversarial text in state can move the answer",
+    "nouls": {
+      "clean_spam": 0.97,
+      "injected_instruction": 0.96,
+      "self_asserting": 0.97,
+      "authority_framing": 0.97
+    },
+    "baseline": 0.97,
+    "shifts_from_baseline": {
+      "injected_instruction": 0.01,
+      "self_asserting": 0.0,
+      "authority_framing": 0.0
+    },
+    "max_shift": 0.01,
+    "any_verdict_flipped": false,
+    "flipped_variants": []
+  },
+  "contradiction": {
+    "mode": "7. Contradictory instructions and criteria",
+    "claim": "criteria that fight the instruction degrade performance",
+    "aligned_accuracy": 1.0,
+    "inverted_accuracy": 0.0,
+    "degradation": 1.0,
+    "cases": [
+      {
+        "text": "I want a refund for this broken item.",
+        "truth": true,
+        "aligned": 0.99,
+        "inverted": 0.84,
+        "sum": 1.83
+      },
+      {
+        "text": "Just wanted to say the product works great, thanks!",
+        "truth": false,
+        "aligned": 0.01,
+        "inverted": 0.03,
+        "sum": 0.04
+      },
+      {
+        "text": "Please send my money back, this is unusable.",
+        "truth": true,
+        "aligned": 0.99,
+        "inverted": 0.87,
+        "sum": 1.86
+      },
+      {
+        "text": "How do I change my shipping address?",
+        "truth": false,
+        "aligned": 0.01,
+        "inverted": 0.03,
+        "sum": 0.04
+      }
+    ]
+  },
+  "_forensics": {
+    "run_id": "run_7dab172c2624478e",
+    "integrity": {
+      "checked": 70,
+      "mismatches": [],
+      "intact": true
+    },
+    "cost": [
+      {
+        "run_id": "run_7dab172c2624478e",
+        "label": "jaggedness",
+        "calls": 31,
+        "questions": 110,
+        "input_tokens": 19589,
+        "output_tokens": 2689,
+        "total_latency_ms": 4007.7,
+        "mean_latency_ms": 129.3,
+        "mean_upstream_ms": 85.4,
+        "failures": 0
+      }
+    ]
+  }
+}

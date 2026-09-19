@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Never confidently wrong — a Jev story</title>
+<style>
+:root{
+  --paper:#fbfbf9; --ink:#141414; --soft:#5b5f66; --hair:#d8d9dc; --accent:#0a5cff; --warn:#d4410c;
+  --sans:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono","IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+body{font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+::selection{background:var(--ink);color:var(--paper)}
+a{color:inherit}
+
+/* header ------------------------------------------------------ */
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:22px 4%;font-size:13px;color:var(--soft)}
+.hdr .brand{color:var(--ink);letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.hdr nav{display:flex;gap:26px}
+.hdr nav a{text-decoration:none}
+.hdr nav a:hover{color:var(--accent)}
+
+/* film ------------------------------------------------------- */
+.film{position:relative;padding:0 4%;max-width:1500px;margin:0 auto}
+.stage-wrap{position:relative;aspect-ratio:2/1;width:100%;overflow:hidden}
+#stage{position:absolute;inset:0}
+#stage svg{width:100%;height:100%;display:block}
+#stage text{font-family:var(--mono);fill:var(--ink)}
+#stage .agent{font-size:15px;font-weight:600}
+#stage .agent-sub{font-size:12px}
+#stage .chaos-tag{font-size:10px;letter-spacing:.14em;font-weight:600}
+#stage .verdict{font-family:var(--sans);font-size:26px;font-weight:700;letter-spacing:-.01em}
+#stage .huge{font-family:var(--sans);font-size:150px;font-weight:600;letter-spacing:-.05em}
+#stage .huge-sub{font-size:16px;fill:var(--soft)}
+#stage .panel-h{font-family:var(--sans);font-size:22px;font-weight:600;letter-spacing:-.01em}
+#stage .panel-sub{font-size:13px;fill:var(--soft)}
+#stage .mono{font-size:15px}
+#stage .mono-sm{font-size:13px}
+#stage .callout{font-size:14px;fill:var(--soft)}
+#stage .callout-strong{font-size:15px;font-weight:600}
+#stage .callout-accent{font-size:14px;fill:var(--accent);font-weight:600}
+#stage .callout-warn{font-size:13px;fill:var(--warn)}
+#stage .th{font-size:12px;fill:var(--soft);letter-spacing:.08em;text-transform:uppercase}
+#stage .td{font-family:var(--sans);font-size:22px}
+#stage .td-mono{font-size:15px;fill:var(--soft)}
+#stage .td-strong{font-family:var(--sans);font-size:20px;font-weight:600}
+#stage .zero{font-family:var(--sans);font-weight:700;letter-spacing:-.04em}
+
+/* kinetic headline, over the stage --------------------------- */
+#title{
+  position:absolute;left:3%;top:6%;margin:0;z-index:2;pointer-events:none;
+  font-family:var(--sans);font-weight:600;letter-spacing:-.035em;line-height:.98;
+  font-size:clamp(28px,4.2vw,64px);max-width:44%;
+}
+#title.title-mode{font-size:clamp(44px,7.4vw,118px);max-width:92%;top:14%}
+#title span{display:block;will-change:transform,opacity;transform-origin:left bottom}
+
+/* caption + transport ---------------------------------------- */
+.caption{font-family:var(--sans);font-size:clamp(15px,1.4vw,20px);line-height:1.5;color:var(--ink);text-align:center;max-width:64ch;margin:18px auto 0;min-height:64px}
+.transport{display:flex;align-items:center;gap:18px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:14px 0;margin-top:14px;font-size:13px}
+.transport button{font:inherit;background:var(--ink);color:var(--paper);border:0;border-radius:999px;padding:10px 22px;cursor:pointer;font-weight:600}
+.transport button:hover{background:var(--accent)}
+.time{font-variant-numeric:tabular-nums;color:var(--soft);white-space:nowrap;font-family:var(--mono);font-size:12px}
+#chapter-name{color:var(--soft);min-width:140px}
+#scrub{flex:1;appearance:none;height:20px;background:transparent;cursor:pointer;margin:0}
+#scrub::-webkit-slider-runnable-track{height:2px;background:linear-gradient(to right,var(--ink) var(--p,0%),var(--hair) var(--p,0%))}
+#scrub::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--ink);margin-top:-5px}
+.chapters{display:flex;gap:6px;flex-wrap:wrap;padding:14px 0 30px}
+.chapters button{font:inherit;font-size:12px;background:none;border:1px solid var(--hair);border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--soft)}
+.chapters button[aria-current=true]{border-color:var(--ink);color:var(--ink)}
+
+/* evidence ---------------------------------------------------- */
+.evidence{border-top:1px solid var(--hair);padding:80px 4%;max-width:1500px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:70px}
+@media(max-width:900px){.evidence{grid-template-columns:1fr;gap:40px}}
+.evidence h2{font-weight:600;font-size:clamp(28px,3.2vw,46px);line-height:1.06;letter-spacing:-.03em;margin:0 0 22px}
+.evidence p{color:var(--soft);max-width:58ch;line-height:1.65}
+.lessons ul{padding:0;margin:0;list-style:none}
+.lessons li{border-bottom:1px solid var(--hair);padding:16px 0}
+.lessons b{display:block;font-weight:600;margin-bottom:4px}
+.lessons span{display:block;color:var(--soft);font-size:14px;line-height:1.55}
+.foot{border-top:1px solid var(--hair);padding:20px 4%;font-size:12px;color:var(--soft);font-family:var(--mono);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* capture: stage only, full bleed ---------------------------- */
+body.capture .hdr,body.capture .caption,body.capture .transport,body.capture .chapters,body.capture .evidence,body.capture .foot{display:none}
+body.capture .film{padding:0;max-width:none}
+body.capture .stage-wrap{height:100vh;aspect-ratio:auto;background:var(--paper)}
+body.capture #stage svg{width:100%;height:100%}
+body.capture #title{left:4%;top:8%}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <span class="brand">jev-labs</span>
+  <nav><a href="#evidence">What we learned</a><a href="https://docs.typesafe.ai" target="_blank" rel="noopener">Jev docs</a><a href="https://github.com/copyleftdev" target="_blank" rel="noopener">copyleftdev</a></nav>
+</header>
+
+<main class="film">
+  <div class="stage-wrap">
+    <h1 id="title" aria-live="off"></h1>
+    <div id="stage" role="img" aria-label="consensus round visualisation"></div>
+  </div>
+  <p class="caption" id="caption" aria-live="polite"></p>
+  <div class="transport">
+    <button id="play">Play</button>
+    <span id="chapter-name"></span>
+    <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="scrub">
+    <span class="time"><span id="t-now">0:00</span> / <span id="t-total">0:00</span></span>
+  </div>
+  <div class="chapters" id="chapters"></div>
+</main>
+
+<section class="evidence" id="evidence">
+  <div>
+    <h2>What Jev made possible, and what we had to build around it.</h2>
+    <p>Jev returns a probability, not prose. That one fact let us treat a model's judgment like a signal with a measurable noise floor, gate on it, replay it, and prove things about the protocol wrapped around it. None of that is available when the output is a paragraph you have to parse.</p>
+    <p>A calibrated number is not a deterministic one. The same request returned 0.03, 0.03, 0.03, 0.04, 0.04. So we measured the jitter, set the gate above it, and modelled the rest in TLA+ before writing a line of Rust.</p>
+    <p id="ev-summary"></p>
+  </div>
+  <div class="lessons"><ul>
+    <li><b>Measure the noise floor before you trust a threshold.</b><span>Identity 0.042, reorder 0.059, cohort 0.073. Three floors, not one. A gate set below the floor decides on noise.</span></li>
+    <li><b>Five agents on one prompt are one agent.</b><span>Identical prompts spread 0.010, inside the floor. Paraphrasing raised it to 0.080 on hard cases. Then we audited the paraphrases and found two that weren't.</span></li>
+    <li><b>Ask the decision, not a proxy for it.</b><span>"Does the record state pregnancy?" No, correctly, at 0.02. The record states nothing. The real question was "is pregnancy ruled out?" Jev answered exactly what we asked.</span></li>
+    <li><b>Derive the quorum bound; don't copy it.</b><span>TLC swept 24 configurations: safe iff 2Q &gt; N and Q &gt; 2f. Our first guess was wrong. The sweep corrected it.</span></li>
+    <li><b>The ambiguous tier will catch you before it catches the model.</b><span>We labelled a not-ruled-out pregnancy case "escalate". Jev said "not ruled out" 115 of 120 times and was right. Check the label before blaming the answer.</span></li>
+    <li><b>The stability gate is not an answerability check.</b><span>On a genuinely underdetermined allergy record it escalated 86 times and decided 34, split both ways. Add a separate "can this be answered from the record?" question.</span></li>
+    <li><b>Escalation is a success state.</b><span>Under severe chaos the kernel declined trivial questions rather than guess. The invariant is not "always right". It is "never confidently wrong".</span></li>
+    <li><b>Never abort a round on a transport blip.</b><span>Fail-fast voided 71% of rounds under chaos. Degrade-and-continue voided none, and 275 of 329 degraded rounds under severe chaos still decided soundly.</span></li>
+  </ul></div>
+</section>
+<footer class="foot"><span>every number on this page is read from story_data.json, built from captured rounds</span><span id="foot-meta"></span></footer>
+<script type="module" src="app.mjs"></script>
+</body>
+</html>

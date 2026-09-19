@@ -1,0 +1,147 @@
+{
+  "obligation_strength": {
+    "task": "obligation strength from masked requirement text",
+    "ground_truth": "FedRAMP FRR `force` field (authored by the standards body)",
+    "n": 18,
+    "accuracy": 0.3889,
+    "mean_ordinal_error": 0.7778,
+    "mean_confidence_correct": 0.736,
+    "mean_confidence_wrong": 0.66,
+    "confidence_separates": true,
+    "per_class": {
+      "MAY": {
+        "n": 6,
+        "accuracy": 0.0,
+        "mean_score": 1.483
+      },
+      "SHOULD": {
+        "n": 6,
+        "accuracy": 0.167,
+        "mean_score": 1.7
+      },
+      "MUST": {
+        "n": 6,
+        "accuracy": 1.0,
+        "mean_score": 1.905
+      }
+    },
+    "confusion": {
+      "MAY->MUST": 3,
+      "MAY->SHOULD": 3,
+      "MUST->MUST": 6,
+      "SHOULD->MUST": 5,
+      "SHOULD->SHOULD": 1
+    },
+    "errors": [
+      {
+        "truth": "MAY",
+        "pred": "MUST",
+        "score": 1.92,
+        "confidence": 0.89,
+        "correct": false,
+        "statement": "Providers with Class A Certifications [MODAL] use cryptographic modules or update streams of cryptographic modules with active validations under the NIST Cryptographic Module Valid",
+        "original_force": "MAY"
+      },
+      {
+        "truth": "SHOULD",
+        "pred": "MUST",
+        "score": 1.92,
+        "confidence": 0.87,
+        "correct": false,
+        "statement": "Providers with Class D Certifications [MODAL] treat internet-reachable likely exploitable vulnerabilities where Potential Agency Impact N-rating > 3 as a FedRAMP Reportable Inciden",
+        "original_force": "SHOULD"
+      },
+      {
+        "truth": "MAY",
+        "pred": "SHOULD",
+        "score": 0.72,
+        "confidence": 0.15,
+        "correct": false,
+        "statement": "Providers [MODAL] responsibly supply content prepared for a Quarterly Review to the public or other parties if the provider determines doing so will NOT likely have an adverse effe",
+        "original_force": "MAY"
+      },
+      {
+        "truth": "MAY",
+        "pred": "MUST",
+        "score": 1.97,
+        "confidence": 0.95,
+        "correct": false,
+        "statement": "Providers with Class A Certifications [MODAL] persistently complete an independent verification and validation assessment of all applicable FedRAMP rules with a FedRAMP Recognized ",
+        "original_force": "MAY"
+      },
+      {
+        "truth": "SHOULD",
+        "pred": "MUST",
+        "score": 1.8,
+        "confidence": 0.7,
+        "correct": false,
+        "statement": "Providers [MODAL] consider at least the following factors when considering the context of the cloud service offering to evaluate detected vulnerabilities:",
+        "original_force": "SHOULD"
+      },
+      {
+        "truth": "SHOULD",
+        "pred": "MUST",
+        "score": 1.65,
+        "confidence": 0.47,
+        "correct": false,
+        "statement": "Providers [MODAL] provide versioning and a release history for recommended secure default settings for top-level administrative accounts and privileged accounts as they are adjuste",
+        "original_force": "SHOULD"
+      }
+    ]
+  },
+  "federal_deference": {
+    "task": "does a statute passage defer to federal law",
+    "ground_truth": "regex over legislator-authored citation text",
+    "n": 18,
+    "accuracy": 0.9444,
+    "precision": 0.9,
+    "recall": 1.0,
+    "false_positives": [
+      {
+        "citation": "Cal. Educ. Code \u00a7 56040.5(a)",
+        "truth": false,
+        "noul": 0.97,
+        "pred": true,
+        "correct": false,
+        "text": "State and local educational agency personnel are prohibited, pursuant to paragraph (25) of subsection (a) of Section 1412 of Title 20 of the United States Code,"
+      }
+    ],
+    "false_negatives": []
+  },
+  "kev_dates": {
+    "task": "is the remediation window longer than 14 days",
+    "ground_truth": "date subtraction on CISA-assigned dates",
+    "n": 18,
+    "accuracy": 1.0,
+    "accuracy_near_boundary_7_28d": 1.0,
+    "n_near_boundary": 12,
+    "accuracy_far_from_boundary": 1.0,
+    "day_spread": [
+      3,
+      14,
+      21,
+      181
+    ],
+    "errors": []
+  },
+  "_forensics": {
+    "run_id": "run_76e40e9f3cb84f3a",
+    "integrity": {
+      "checked": 1226,
+      "mismatches": [],
+      "intact": true
+    },
+    "cost": {
+      "run_id": "run_76e40e9f3cb84f3a",
+      "label": "aion_eval",
+      "calls": 54,
+      "questions": 54,
+      "input_tokens": 22279,
+      "output_tokens": 1116,
+      "total_latency_ms": 7174.0,
+      "mean_latency_ms": 132.9,
+      "mean_upstream_ms": 89.1,
+      "failures": 0
+    }
+  }
+}

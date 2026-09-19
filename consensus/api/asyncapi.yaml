@@ -1,0 +1,428 @@
+asyncapi: 3.1.0
+
+info:
+  title: Semantic Consensus Kernel
+  version: 0.1.0
+  description: |
+    Message contract for consensus among agents whose votes come from a
+    non-deterministic semantic oracle.
+
+    **This contract is derived from a model-checked TLA+ specification**
+    (`spec/SemanticConsensusV2.tla`), not sketched freehand. Every operation
+    below corresponds to an action in that spec, and every payload field to a
+    spec variable. The traceability table is in `spec/TRACEABILITY.md`.
+
+    Verified properties the wire protocol must not break:
+
+    - `DecisionIsReproducible` — a verdict only commits on a quorum of votes
+      that sit outside the oracle's measured jitter band. Without this the
+      kernel can decide on votes that would flip if re-asked one second later.
+    - `EscalationIsJustified` — `UNCERTAIN` is only emitted when no stable
+      quorum was available.
+    - `EventuallyDecided` — the kernel always reaches an outcome. Without the
+      escalation path, TLC proves a livelock is reachable in 9 states.
+
+    The `stable` flag is the load-bearing concept. It is NOT a model
+    parameter — it is computed from an empirically measured noise floor
+    (0.042–0.073 across transforms, from 1,406 captured oracle calls). An
+    implementation that hardcodes a guess here voids the verification.
+
+  license:
+    name: MIT
+  tags:
+    - name: consensus
+    - name: formal-methods
+
+defaultContentType: application/json
+
+servers:
+  broker:
+    host: localhost:4222
+    protocol: nats
+    description: |
+      NATS is the reference transport: subject-based routing maps cleanly onto
+      per-round topics, and its at-most-once default forces the protocol to be
+      explicit about retries rather than inheriting hidden delivery guarantees.
+
+channels:
+  oracleConsultation:
+    address: consensus.{roundId}.consult
+    title: Oracle consultation
+    description: |
+      An agent's request to the judgment oracle and the typed answer returned.
+      Corresponds to the TLA+ actions `Consult(a)` and `Reconsult(a)`.
+    parameters:
+      roundId:
+        description: Identifier of the consensus round.
+    messages:
+      consultRequest:
+        $ref: '#/components/messages/ConsultRequest'
+      consultResult:
+        $ref: '#/components/messages/ConsultResult'
+
+  voteAnnouncement:
+    address: consensus.{roundId}.vote
+    title: Vote announcement
+    description: |
+      An agent publishes its current vote and, critically, whether that vote is
+      STABLE. Corresponds to the post-state of `Consult`/`Reconsult`.
+    parameters:
+      roundId:
+        description: Identifier of the consensus round.
+    messages:
+      voteAnnounce:
+        $ref: '#/components/messages/VoteAnnounce'
+
+  agentLiveness:
+    address: consensus.{roundId}.liveness
+    title: Agent liveness
+    description: |
+      Heartbeats and crash notifications. Corresponds to the TLA+ `Crash(a)`
+      action and the `crashed` variable. Only live agents count toward quorum.
+    parameters:
+      roundId:
+        description: Identifier of the consensus round.
+    messages:
+      heartbeat:
+        $ref: '#/components/messages/Heartbeat'
+      crashNotice:
+        $ref: '#/components/messages/CrashNotice'
+
+  roundOutcome:
+    address: consensus.{roundId}.outcome
+    title: Round outcome
+    description: |
+      The terminal message of a round. Corresponds to the TLA+ `Decide` and
+      `Escalate` actions. Exactly one outcome is ever published per round —
+      the `Irrevocable` property.
+    parameters:
+      roundId:
+        description: Identifier of the consensus round.
+    messages:
+      decision:
+        $ref: '#/components/messages/Decision'
+      escalation:
+        $ref: '#/components/messages/Escalation'
+
+operations:
+  requestJudgment:
+    action: send
+    channel:
+      $ref: '#/channels/oracleConsultation'
+    title: Ask the oracle
+    description: |
+      TLA+ `Consult(a)` when `asked[a] = 0`, `Reconsult(a)` when re-asking an
+      unstable vote. The `asked` budget is enforced by the sender; exceeding it
+      is what eventually enables `Escalate`.
+    messages:
+      - $ref: '#/channels/oracleConsultation/messages/consultRequest'
+
+  receiveJudgment:
+    action: receive
+    channel:
+      $ref: '#/channels/oracleConsultation'
+    title: Oracle answer
+    messages:
+      - $ref: '#/channels/oracleConsultation/messages/consultResult'
+
+  announceVote:
+    action: send
+    channel:
+      $ref: '#/channels/voteAnnouncement'
+    title: Publish a vote with its stability classification
+    messages:
+      - $ref: '#/channels/voteAnnouncement/messages/voteAnnounce'
+
+  publishOutcome:
+    action: send
+    channel:
+      $ref: '#/channels/roundOutcome'
+    title: Publish the terminal outcome
+    description: |
+      A coordinator may publish a `Decision` only when it observes a quorum of
+      STABLE votes from LIVE agents, and an `Escalation` only when every live
+      agent is exhausted and no stable quorum exists.
+    messages:
+      - $ref: '#/channels/roundOutcome/messages/decision'
+      - $ref: '#/channels/roundOutcome/messages/escalation'
+
+components:
+  schemas:
+    Verdict:
+      type: string
+      title: Verdict
+      description: The real decision space. TLA+ `Verdicts`.
+      enum: ['yes', 'no']
+
+    Outcome:
+      type: string
+      title: Outcome
+      description: |
+        TLA+ `Outcomes`. `uncertain` is a first-class result, not an error —
+        it is the protocol's admission that the oracle never stabilised, which
+        the liveness proof depends on.
+      enum: ['yes', 'no', 'uncertain']
+
+    EscalationReason:
+      type: string
+      title: EscalationReason
+      enum: [no_stable_quorum, budget_exhausted, insufficient_live_agents]
+
+    CrashReason:
+      type: string
+      title: CrashReason
+      enum: [heartbeat_timeout, transport_error, explicit_shutdown]
+
+    StabilityEvidence:
+      type: object
+      title: StabilityEvidence
+      description: |
+        Why a vote was classified stable or unstable. This is what makes a
+        decision auditable after the fact: the margin is recomputable from the
+        recorded probability and the noise floor in force at the time.
+      required: [probability, threshold, noiseFloor, margin, stable]
+      additionalProperties: false
+      properties:
+        probability:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Raw oracle probability for the chosen verdict.
+        threshold:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Decision boundary this probability was compared against.
+        noiseFloor:
+          type: number
+          minimum: 0
+          description: |
+            Measured oracle jitter for this transform class. Empirical, not
+            configured: 0.042–0.073 in our measurements. A vote is stable only
+            if it clears the boundary by more than this.
+        margin:
+          type: number
+          minimum: 0
+          description: |
+            `abs(probability - threshold)`. Stability requires
+            `margin > noiseFloor`.
+        stable:
+          type: boolean
+          description: TLA+ `stable[a]`. Only stable votes count toward quorum.
+        noiseFloorSource:
+          type: string
+          description: |
+            Identifier of the calibration run that produced `noiseFloor`, so a
+            decision can be traced to the measurement that justified it.
+
+    Vote:
+      type: object
+      title: Vote
+      description: |
+        An agent's vote together with its stability classification. This is the
+        unit that quorum counting operates on.
+      required: [roundId, agentId, verdict, stable, attempt]
+      additionalProperties: false
+      properties:
+        roundId:
+          type: string
+          minLength: 1
+        agentId:
+          type: string
+          minLength: 1
+        verdict:
+          $ref: '#/components/schemas/Verdict'
+        stable:
+          type: boolean
+          description: TLA+ `stable[a]`.
+        attempt:
+          type: integer
+          minimum: 1
+          description: TLA+ `asked[a]`.
+        evidence:
+          $ref: '#/components/schemas/StabilityEvidence'
+
+    ConsultRequestPayload:
+      type: object
+      title: ConsultRequestPayload
+      required: [roundId, agentId, attempt, question]
+      additionalProperties: false
+      properties:
+        roundId:
+          type: string
+          minLength: 1
+        agentId:
+          type: string
+          minLength: 1
+        attempt:
+          type: integer
+          minimum: 1
+          description: |
+            TLA+ `asked[a]` after this request. Bounded by `MaxAsks`; the
+            bound is what guarantees `Exhausted` eventually holds and the
+            protocol cannot livelock.
+        question:
+          type: string
+          description: The judgment being asked of the oracle.
+        state:
+          type: string
+          description: |
+            Content the judgment is made against. Sent once per call — the
+            oracle bills state once regardless of question count, so batching
+            independent questions over one state is ~89% cheaper.
+
+    ConsultResultPayload:
+      type: object
+      title: ConsultResultPayload
+      required: [roundId, agentId, attempt, verdict, evidence]
+      additionalProperties: false
+      properties:
+        roundId:
+          type: string
+          minLength: 1
+        agentId:
+          type: string
+          minLength: 1
+        attempt:
+          type: integer
+          minimum: 1
+        verdict:
+          $ref: '#/components/schemas/Verdict'
+        evidence:
+          $ref: '#/components/schemas/StabilityEvidence'
+        oracleRequestId:
+          type: string
+          description: |
+            The oracle's own request identifier, retained so any vote can be
+            reconciled against the provider's records.
+
+    HeartbeatPayload:
+      type: object
+      title: HeartbeatPayload
+      required: [roundId, agentId, sentAt]
+      additionalProperties: false
+      properties:
+        roundId:
+          type: string
+          minLength: 1
+        agentId:
+          type: string
+          minLength: 1
+        sentAt:
+          type: string
+          format: date-time
+
+    CrashNoticePayload:
+      type: object
+      title: CrashNoticePayload
+      required: [roundId, agentId, detectedAt]
+      additionalProperties: false
+      properties:
+        roundId:
+          type: string
+          minLength: 1
+        agentId:
+          type: string
+          minLength: 1
+        detectedAt:
+          type: string
+          format: date-time
+        reason:
+          $ref: '#/components/schemas/CrashReason'
+
+    DecisionPayload:
+      type: object
+      title: DecisionPayload
+      required: [roundId, outcome, supportingVotes, quorum]
+      additionalProperties: false
+      properties:
+        roundId:
+          type: string
+          minLength: 1
+        outcome:
+          $ref: '#/components/schemas/Verdict'
+        quorum:
+          type: integer
+          minimum: 1
+        supportingVotes:
+          type: array
+          minItems: 1
+          description: |
+            The stable votes that justified this decision. Every entry MUST
+            have `stable = true` — this is the wire-level encoding of
+            `DecisionIsReproducible`. A receiver can verify the invariant
+            independently from this field alone.
+          items:
+            $ref: '#/components/schemas/Vote'
+
+    EscalationPayload:
+      type: object
+      title: EscalationPayload
+      required: [roundId, outcome, reason, observedVotes]
+      additionalProperties: false
+      properties:
+        roundId:
+          type: string
+          minLength: 1
+        outcome:
+          type: string
+          enum: [uncertain]
+        reason:
+          $ref: '#/components/schemas/EscalationReason'
+        observedVotes:
+          type: array
+          description: |
+            Every vote seen, stable or not. Evidence for
+            `EscalationIsJustified`: a reader can confirm no stable quorum
+            existed rather than taking the coordinator's word for it.
+          items:
+            $ref: '#/components/schemas/Vote'
+
+  messages:
+    ConsultRequest:
+      name: consultRequest
+      title: Consult the oracle
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ConsultRequestPayload'
+
+    ConsultResult:
+      name: consultResult
+      title: Oracle answer with stability classification
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ConsultResultPayload'
+
+    VoteAnnounce:
+      name: voteAnnounce
+      title: Vote with stability
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/Vote'
+
+    Heartbeat:
+      name: heartbeat
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/HeartbeatPayload'
+
+    CrashNotice:
+      name: crashNotice
+      title: Agent considered crashed
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/CrashNoticePayload'
+
+    Decision:
+      name: decision
+      title: Committed verdict
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DecisionPayload'
+
+    Escalation:
+      name: escalation
+      title: Uncertain — route to a human or reasoning model
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/EscalationPayload'

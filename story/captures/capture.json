@@ -1,0 +1,14 @@
+{
+  "duration": 255,
+  "rounds": 1680,
+  "golden": 1080,
+  "violations": 0,
+  "start": 0,
+  "end": 255.0,
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "frames": 7650,
+  "video": "captures/never-confidently-wrong-v2.mp4",
+  "audio": "assets/narration/jev-story.mp3"
+}

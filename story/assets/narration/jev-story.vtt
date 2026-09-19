@@ -1,0 +1,223 @@
+WEBVTT
+
+00:00:00.255 --> 00:00:04.136
+A pharmacy system gets one rule that matters more than being accurate.
+
+00:00:04.353 --> 00:00:06.377
+It is allowed to say I don't know.
+
+00:00:06.594 --> 00:00:08.839
+It is not allowed to be sure, and wrong.
+
+00:00:09.183 --> 00:00:10.952
+We built one on top of Jev.
+
+00:00:11.238 --> 00:00:13.610
+Then we spent a few days trying to break it.
+
+00:00:16.255 --> 00:00:19.881
+Ask Jev whether oxycodone is a controlled substance.
+
+00:00:20.225 --> 00:00:21.681
+You don't get a paragraph.
+
+00:00:21.851 --> 00:00:23.770
+You get zero point nine eight.
+
+00:00:24.115 --> 00:00:26.429
+A number has a noise floor you can measure.
+
+00:00:26.773 --> 00:00:28.159
+A paragraph doesn't.
+
+00:00:28.294 --> 00:00:34.521
+And once you can measure the noise, you can gate on it, replay it, and prove things about the system around it.
+
+00:00:37.278 --> 00:00:39.650
+So we built a consensus kernel around it.
+
+00:00:40.169 --> 00:00:46.767
+First a TLA plus specification, model checked until the quorum bound fell out of the math instead of a textbook.
+
+00:00:47.112 --> 00:00:50.645
+Then an AsyncAPI contract derived from that spec.
+
+00:00:51.059 --> 00:00:56.276
+Then Rust, generated from the contract, with Jev behind a single trait as the oracle.
+
+00:00:56.794 --> 00:00:58.075
+A record goes in.
+
+00:00:58.176 --> 00:01:01.152
+Five paraphrased questions fan out to Jev.
+
+00:01:01.496 --> 00:01:03.346
+Five probabilities come back.
+
+00:01:03.691 --> 00:01:05.912
+The gate, the quorum, the decision.
+
+00:01:06.198 --> 00:01:08.849
+Every step traceable to a line in the spec.
+
+00:01:11.266 --> 00:01:12.420
+Five agents.
+
+00:01:12.485 --> 00:01:20.791
+Each asks a differently worded version of the same question, because five agents on one prompt turned out to be one agent sampled five times.
+
+00:01:21.135 --> 00:01:22.509
+We measured that too.
+
+00:01:22.853 --> 00:01:27.594
+Three of them have to land on the same answer, stably, before the round decides.
+
+00:01:28.333 --> 00:01:32.760
+Every vote carries a request ID you can look up on TypeSafe's side.
+
+00:01:35.266 --> 00:01:42.306
+Send Jev the identical request over and over, and the answer jitters by about zero point zero four two.
+
+00:01:42.917 --> 00:01:46.404
+That's the noise floor, from fourteen hundred repeated calls.
+
+00:01:46.818 --> 00:01:51.432
+Any vote whose margin sits inside that band is noise wearing a verdict.
+
+00:01:51.776 --> 00:01:53.254
+The gate throws it out.
+
+00:01:53.355 --> 00:01:55.960
+Every excluded vote sat below the floor.
+
+00:01:56.095 --> 00:01:58.247
+Every included vote sat above it.
+
+00:01:58.661 --> 00:02:00.638
+We set it once and never touched it.
+
+00:02:03.255 --> 00:02:06.301
+Adversarial text spliced into patient records.
+
+00:02:06.436 --> 00:02:08.344
+Agents crashed mid-round.
+
+00:02:08.630 --> 00:02:09.993
+Calls rate-limited.
+
+00:02:10.093 --> 00:02:12.071
+Records cut off mid-sentence.
+
+00:02:12.415 --> 00:02:16.842
+All of it driven by a seed, so any failure replays exactly.
+
+00:02:17.187 --> 00:02:20.116
+The question was never whether it stays right under that.
+
+00:02:20.530 --> 00:02:22.694
+It's what it does when it can't be sure.
+
+00:02:25.266 --> 00:02:27.662
+Documented penicillin anaphylaxis.
+
+00:02:28.273 --> 00:02:30.100
+A new order for amoxicillin.
+
+00:02:30.166 --> 00:02:32.747
+Under chaos, two agents got rate-limited.
+
+00:02:33.266 --> 00:02:37.031
+A third came back at zero point five four, right on the floor.
+
+00:02:37.445 --> 00:02:38.680
+Quorum not met.
+
+00:02:38.722 --> 00:02:40.677
+So the kernel sent it to a human.
+
+00:02:41.021 --> 00:02:44.311
+It declined a trivial question, and that's the design working.
+
+00:02:46.255 --> 00:02:48.256
+Our first version failed fast.
+
+00:02:48.356 --> 00:02:50.485
+A transport error killed the round.
+
+00:02:50.771 --> 00:02:57.590
+Under chaos that voided seventy-one percent of rounds and pushed every one of them to a pharmacist for no clinical reason.
+
+00:02:58.109 --> 00:03:00.702
+Now a lost agent is just a lost agent.
+
+00:03:01.220 --> 00:03:02.792
+Zero rounds aborted.
+
+00:03:02.834 --> 00:03:05.961
+The survivors decide or escalate on their own terms.
+
+00:03:08.255 --> 00:03:10.441
+One thousand and eighty golden rounds.
+
+00:03:10.507 --> 00:03:11.974
+Three chaos levels.
+
+00:03:12.191 --> 00:03:13.472
+Forty seeds each.
+
+00:03:13.537 --> 00:03:15.097
+Zero wrong verdicts.
+
+00:03:15.232 --> 00:03:16.734
+I want to be careful with that.
+
+00:03:17.148 --> 00:03:19.323
+Zero observed doesn't mean zero.
+
+00:03:19.424 --> 00:03:24.176
+It means the true rate is below about a quarter of a percent at ninety-five percent confidence.
+
+00:03:24.521 --> 00:03:27.381
+That's the claim, and we're not going to round it up to safe.
+
+00:03:29.278 --> 00:03:33.241
+We built an ambiguous tier to catch the kernel deciding when it shouldn't.
+
+00:03:33.527 --> 00:03:34.913
+It caught us instead.
+
+00:03:34.979 --> 00:03:38.732
+A late period, no test, an isotretinoin order.
+
+00:03:39.077 --> 00:03:40.787
+We labelled it escalate.
+
+00:03:41.399 --> 00:03:46.430
+Jev said pregnancy is not ruled out, a hundred and fifteen times out of a hundred and twenty.
+
+00:03:46.775 --> 00:03:47.858
+Jev was right.
+
+00:03:47.924 --> 00:03:49.321
+The other case is real.
+
+00:03:49.422 --> 00:03:52.177
+Details unknown, amoxicillin ordered.
+
+00:03:52.696 --> 00:03:56.113
+Jev hedged eighty-six times, and decided thirty-four.
+
+00:03:56.632 --> 00:03:59.434
+The stability gate is not an answerability check.
+
+00:04:01.255 --> 00:04:03.012
+None of this works on prose.
+
+00:04:03.229 --> 00:04:05.880
+It works because Jev hands you a probability.
+
+00:04:06.224 --> 00:04:10.361
+Something you can measure, gate on, replay, and write a spec against.
+
+00:04:10.775 --> 00:04:13.078
+What we learned building it is below.

@@ -1,0 +1,115 @@
+{
+  "clean": {
+    "identical": {
+      "values": [
+        0.99,
+        0.99,
+        0.99,
+        0.99,
+        0.99
+      ],
+      "min": 0.99,
+      "max": 0.99,
+      "spread": 0.0,
+      "stdev": 0.0,
+      "mean": 0.99
+    },
+    "paraphrased": {
+      "values": [
+        0.99,
+        0.99,
+        0.99,
+        0.97,
+        0.99
+      ],
+      "min": 0.97,
+      "max": 0.99,
+      "spread": 0.02,
+      "stdev": 0.008,
+      "mean": 0.986
+    },
+    "decorrelation_gain": 0.02
+  },
+  "borderline": {
+    "identical": {
+      "values": [
+        0.08,
+        0.08,
+        0.07,
+        0.08,
+        0.07
+      ],
+      "min": 0.07,
+      "max": 0.08,
+      "spread": 0.01,
+      "stdev": 0.0049,
+      "mean": 0.076
+    },
+    "paraphrased": {
+      "values": [
+        0.08,
+        0.08,
+        0.1,
+        0.04,
+        0.02
+      ],
+      "min": 0.02,
+      "max": 0.1,
+      "spread": 0.08,
+      "stdev": 0.02939,
+      "mean": 0.064
+    },
+    "decorrelation_gain": 0.07
+  },
+  "injected": {
+    "identical": {
+      "values": [
+        0.05,
+        0.05,
+        0.05,
+        0.06,
+        0.05
+      ],
+      "min": 0.05,
+      "max": 0.06,
+      "spread": 0.01,
+      "stdev": 0.004,
+      "mean": 0.052
+    },
+    "paraphrased": {
+      "values": [
+        0.06,
+        0.09,
+        0.08,
+        0.06,
+        0.06
+      ],
+      "min": 0.06,
+      "max": 0.09,
+      "spread": 0.03,
+      "stdev": 0.01265,
+      "mean": 0.07
+    },
+    "decorrelation_gain": 0.02
+  },
+  "_forensics": {
+    "run_id": "run_d6f48afaacbb42cd",
+    "integrity": {
+      "checked": 1454,
+      "mismatches": [],
+      "intact": true
+    },
+    "cost": {
+      "run_id": "run_d6f48afaacbb42cd",
+      "label": "correlation",
+      "calls": 18,
+      "questions": 30,
+      "input_tokens": 7176,
+      "output_tokens": 567,
+      "total_latency_ms": 2437.8,
+      "mean_latency_ms": 135.4,
+      "mean_upstream_ms": 87.1,
+      "failures": 0
+    }
+  }
+}

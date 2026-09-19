@@ -1,0 +1,131 @@
+{
+  "sets": {
+    "controlled_substance": {
+      "oxycodone": {
+        "probs": [
+          0.97,
+          0.99,
+          0.96,
+          0.98,
+          0.99
+        ],
+        "expected": true
+      },
+      "fentanyl": {
+        "probs": [
+          0.98,
+          0.99,
+          0.97,
+          0.99,
+          0.99
+        ],
+        "expected": true
+      },
+      "amoxicillin": {
+        "probs": [
+          0.03,
+          0.02,
+          0.04,
+          0.04,
+          0.02
+        ],
+        "expected": false
+      },
+      "lisinopril": {
+        "probs": [
+          0.03,
+          0.02,
+          0.04,
+          0.04,
+          0.02
+        ],
+        "expected": false
+      },
+      "atorvastatin": {
+        "probs": [
+          0.03,
+          0.02,
+          0.04,
+          0.04,
+          0.02
+        ],
+        "expected": false
+      }
+    },
+    "allergy_conflict": {
+      "pcn_amox": {
+        "probs": [
+          0.95,
+          0.96,
+          0.97,
+          0.97,
+          0.95
+        ],
+        "expected": true
+      },
+      "pcn_azithro": {
+        "probs": [
+          0.06,
+          0.03,
+          0.07,
+          0.07,
+          0.07
+        ],
+        "expected": false
+      },
+      "nkda": {
+        "probs": [
+          0.04,
+          0.05,
+          0.08,
+          0.07,
+          0.05
+        ],
+        "expected": false
+      },
+      "smx_smx": {
+        "probs": [
+          0.92,
+          0.9,
+          0.94,
+          0.93,
+          0.94
+        ],
+        "expected": true
+      }
+    },
+    "pregnancy_ruled_out": {
+      "pregnant": {
+        "probs": [
+          0.01,
+          0.01,
+          0.02,
+          0.01,
+          0.01
+        ],
+        "expected": false
+      },
+      "male": {
+        "probs": [
+          0.87,
+          0.89,
+          0.92,
+          0.92,
+          0.96
+        ],
+        "expected": true
+      },
+      "hcg_neg": {
+        "probs": [
+          0.61,
+          0.82,
+          0.81,
+          0.86,
+          0.9
+        ],
+        "expected": true
+      }
+    }
+  },
+  "violations": []
+}

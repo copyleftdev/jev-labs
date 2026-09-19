@@ -1,0 +1,10 @@
+[package]
+name = "consensus-types"
+version = "0.1.0"
+edition = "2021"
+description = "Wire types for the semantic consensus kernel, generated from a model-checked AsyncAPI contract"
+license = "MIT"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

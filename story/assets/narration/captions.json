@@ -1,0 +1,446 @@
+[
+  {
+    "start": 0.255,
+    "end": 4.136,
+    "text": "A pharmacy system gets one rule that matters more than being accurate.",
+    "chapter": 0
+  },
+  {
+    "start": 4.353,
+    "end": 6.377,
+    "text": "It is allowed to say I don't know.",
+    "chapter": 0
+  },
+  {
+    "start": 6.594,
+    "end": 8.839,
+    "text": "It is not allowed to be sure, and wrong.",
+    "chapter": 0
+  },
+  {
+    "start": 9.183,
+    "end": 10.952,
+    "text": "We built one on top of Jev.",
+    "chapter": 0
+  },
+  {
+    "start": 11.238,
+    "end": 13.61,
+    "text": "Then we spent a few days trying to break it.",
+    "chapter": 0
+  },
+  {
+    "start": 16.255,
+    "end": 19.881,
+    "text": "Ask Jev whether oxycodone is a controlled substance.",
+    "chapter": 1
+  },
+  {
+    "start": 20.225,
+    "end": 21.681,
+    "text": "You don't get a paragraph.",
+    "chapter": 1
+  },
+  {
+    "start": 21.851,
+    "end": 23.77,
+    "text": "You get zero point nine eight.",
+    "chapter": 1
+  },
+  {
+    "start": 24.115,
+    "end": 26.429,
+    "text": "A number has a noise floor you can measure.",
+    "chapter": 1
+  },
+  {
+    "start": 26.773,
+    "end": 28.159,
+    "text": "A paragraph doesn't.",
+    "chapter": 1
+  },
+  {
+    "start": 28.294,
+    "end": 34.521,
+    "text": "And once you can measure the noise, you can gate on it, replay it, and prove things about the system around it.",
+    "chapter": 1
+  },
+  {
+    "start": 37.278,
+    "end": 39.65,
+    "text": "So we built a consensus kernel around it.",
+    "chapter": 2
+  },
+  {
+    "start": 40.169,
+    "end": 46.767,
+    "text": "First a TLA plus specification, model checked until the quorum bound fell out of the math instead of a textbook.",
+    "chapter": 2
+  },
+  {
+    "start": 47.112,
+    "end": 50.645,
+    "text": "Then an AsyncAPI contract derived from that spec.",
+    "chapter": 2
+  },
+  {
+    "start": 51.059,
+    "end": 56.276,
+    "text": "Then Rust, generated from the contract, with Jev behind a single trait as the oracle.",
+    "chapter": 2
+  },
+  {
+    "start": 56.794,
+    "end": 58.075,
+    "text": "A record goes in.",
+    "chapter": 2
+  },
+  {
+    "start": 58.176,
+    "end": 61.152,
+    "text": "Five paraphrased questions fan out to Jev.",
+    "chapter": 2
+  },
+  {
+    "start": 61.496,
+    "end": 63.346,
+    "text": "Five probabilities come back.",
+    "chapter": 2
+  },
+  {
+    "start": 63.691,
+    "end": 65.912,
+    "text": "The gate, the quorum, the decision.",
+    "chapter": 2
+  },
+  {
+    "start": 66.198,
+    "end": 68.849,
+    "text": "Every step traceable to a line in the spec.",
+    "chapter": 2
+  },
+  {
+    "start": 71.266,
+    "end": 72.42,
+    "text": "Five agents.",
+    "chapter": 3
+  },
+  {
+    "start": 72.485,
+    "end": 80.791,
+    "text": "Each asks a differently worded version of the same question, because five agents on one prompt turned out to be one agent sampled five times.",
+    "chapter": 3
+  },
+  {
+    "start": 81.135,
+    "end": 82.509,
+    "text": "We measured that too.",
+    "chapter": 3
+  },
+  {
+    "start": 82.853,
+    "end": 87.594,
+    "text": "Three of them have to land on the same answer, stably, before the round decides.",
+    "chapter": 3
+  },
+  {
+    "start": 88.333,
+    "end": 92.76,
+    "text": "Every vote carries a request ID you can look up on TypeSafe's side.",
+    "chapter": 3
+  },
+  {
+    "start": 95.266,
+    "end": 102.306,
+    "text": "Send Jev the identical request over and over, and the answer jitters by about zero point zero four two.",
+    "chapter": 4
+  },
+  {
+    "start": 102.917,
+    "end": 106.404,
+    "text": "That's the noise floor, from fourteen hundred repeated calls.",
+    "chapter": 4
+  },
+  {
+    "start": 106.818,
+    "end": 111.432,
+    "text": "Any vote whose margin sits inside that band is noise wearing a verdict.",
+    "chapter": 4
+  },
+  {
+    "start": 111.776,
+    "end": 113.254,
+    "text": "The gate throws it out.",
+    "chapter": 4
+  },
+  {
+    "start": 113.355,
+    "end": 115.96,
+    "text": "Every excluded vote sat below the floor.",
+    "chapter": 4
+  },
+  {
+    "start": 116.095,
+    "end": 118.247,
+    "text": "Every included vote sat above it.",
+    "chapter": 4
+  },
+  {
+    "start": 118.661,
+    "end": 120.638,
+    "text": "We set it once and never touched it.",
+    "chapter": 4
+  },
+  {
+    "start": 123.255,
+    "end": 126.301,
+    "text": "Adversarial text spliced into patient records.",
+    "chapter": 5
+  },
+  {
+    "start": 126.436,
+    "end": 128.344,
+    "text": "Agents crashed mid-round.",
+    "chapter": 5
+  },
+  {
+    "start": 128.63,
+    "end": 129.993,
+    "text": "Calls rate-limited.",
+    "chapter": 5
+  },
+  {
+    "start": 130.093,
+    "end": 132.071,
+    "text": "Records cut off mid-sentence.",
+    "chapter": 5
+  },
+  {
+    "start": 132.415,
+    "end": 136.842,
+    "text": "All of it driven by a seed, so any failure replays exactly.",
+    "chapter": 5
+  },
+  {
+    "start": 137.187,
+    "end": 140.116,
+    "text": "The question was never whether it stays right under that.",
+    "chapter": 5
+  },
+  {
+    "start": 140.53,
+    "end": 142.694,
+    "text": "It's what it does when it can't be sure.",
+    "chapter": 5
+  },
+  {
+    "start": 145.266,
+    "end": 147.662,
+    "text": "Documented penicillin anaphylaxis.",
+    "chapter": 6
+  },
+  {
+    "start": 148.273,
+    "end": 150.1,
+    "text": "A new order for amoxicillin.",
+    "chapter": 6
+  },
+  {
+    "start": 150.166,
+    "end": 152.747,
+    "text": "Under chaos, two agents got rate-limited.",
+    "chapter": 6
+  },
+  {
+    "start": 153.266,
+    "end": 157.031,
+    "text": "A third came back at zero point five four, right on the floor.",
+    "chapter": 6
+  },
+  {
+    "start": 157.445,
+    "end": 158.68,
+    "text": "Quorum not met.",
+    "chapter": 6
+  },
+  {
+    "start": 158.722,
+    "end": 160.677,
+    "text": "So the kernel sent it to a human.",
+    "chapter": 6
+  },
+  {
+    "start": 161.021,
+    "end": 164.311,
+    "text": "It declined a trivial question, and that's the design working.",
+    "chapter": 6
+  },
+  {
+    "start": 166.255,
+    "end": 168.256,
+    "text": "Our first version failed fast.",
+    "chapter": 7
+  },
+  {
+    "start": 168.356,
+    "end": 170.485,
+    "text": "A transport error killed the round.",
+    "chapter": 7
+  },
+  {
+    "start": 170.771,
+    "end": 177.59,
+    "text": "Under chaos that voided seventy-one percent of rounds and pushed every one of them to a pharmacist for no clinical reason.",
+    "chapter": 7
+  },
+  {
+    "start": 178.109,
+    "end": 180.702,
+    "text": "Now a lost agent is just a lost agent.",
+    "chapter": 7
+  },
+  {
+    "start": 181.22,
+    "end": 182.792,
+    "text": "Zero rounds aborted.",
+    "chapter": 7
+  },
+  {
+    "start": 182.834,
+    "end": 185.961,
+    "text": "The survivors decide or escalate on their own terms.",
+    "chapter": 7
+  },
+  {
+    "start": 188.255,
+    "end": 190.441,
+    "text": "One thousand and eighty golden rounds.",
+    "chapter": 8
+  },
+  {
+    "start": 190.507,
+    "end": 191.974,
+    "text": "Three chaos levels.",
+    "chapter": 8
+  },
+  {
+    "start": 192.191,
+    "end": 193.472,
+    "text": "Forty seeds each.",
+    "chapter": 8
+  },
+  {
+    "start": 193.537,
+    "end": 195.097,
+    "text": "Zero wrong verdicts.",
+    "chapter": 8
+  },
+  {
+    "start": 195.232,
+    "end": 196.734,
+    "text": "I want to be careful with that.",
+    "chapter": 8
+  },
+  {
+    "start": 197.148,
+    "end": 199.323,
+    "text": "Zero observed doesn't mean zero.",
+    "chapter": 8
+  },
+  {
+    "start": 199.424,
+    "end": 204.176,
+    "text": "It means the true rate is below about a quarter of a percent at ninety-five percent confidence.",
+    "chapter": 8
+  },
+  {
+    "start": 204.521,
+    "end": 207.381,
+    "text": "That's the claim, and we're not going to round it up to safe.",
+    "chapter": 8
+  },
+  {
+    "start": 209.278,
+    "end": 213.241,
+    "text": "We built an ambiguous tier to catch the kernel deciding when it shouldn't.",
+    "chapter": 9
+  },
+  {
+    "start": 213.527,
+    "end": 214.913,
+    "text": "It caught us instead.",
+    "chapter": 9
+  },
+  {
+    "start": 214.979,
+    "end": 218.732,
+    "text": "A late period, no test, an isotretinoin order.",
+    "chapter": 9
+  },
+  {
+    "start": 219.077,
+    "end": 220.787,
+    "text": "We labelled it escalate.",
+    "chapter": 9
+  },
+  {
+    "start": 221.399,
+    "end": 226.43,
+    "text": "Jev said pregnancy is not ruled out, a hundred and fifteen times out of a hundred and twenty.",
+    "chapter": 9
+  },
+  {
+    "start": 226.775,
+    "end": 227.858,
+    "text": "Jev was right.",
+    "chapter": 9
+  },
+  {
+    "start": 227.924,
+    "end": 229.321,
+    "text": "The other case is real.",
+    "chapter": 9
+  },
+  {
+    "start": 229.422,
+    "end": 232.177,
+    "text": "Details unknown, amoxicillin ordered.",
+    "chapter": 9
+  },
+  {
+    "start": 232.696,
+    "end": 236.113,
+    "text": "Jev hedged eighty-six times, and decided thirty-four.",
+    "chapter": 9
+  },
+  {
+    "start": 236.632,
+    "end": 239.434,
+    "text": "The stability gate is not an answerability check.",
+    "chapter": 9
+  },
+  {
+    "start": 241.255,
+    "end": 243.012,
+    "text": "None of this works on prose.",
+    "chapter": 10
+  },
+  {
+    "start": 243.229,
+    "end": 245.88,
+    "text": "It works because Jev hands you a probability.",
+    "chapter": 10
+  },
+  {
+    "start": 246.224,
+    "end": 250.361,
+    "text": "Something you can measure, gate on, replay, and write a spec against.",
+    "chapter": 10
+  },
+  {
+    "start": 250.775,
+    "end": 253.078,
+    "text": "What we learned building it is below.",
+    "chapter": 10
+  }
+]

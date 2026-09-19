@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+target/
+node_modules/
+# forensics.db is committed; WAL sidecars are not
+forensics.db-shm
+forensics.db-wal
+# raw ElevenLabs takes (58 MB, regenerable with narrate.py); the assembled master is committed
+story/narration-work/
+# the rendered film lives on YouTube
+story/captures/*.mp4
+.agents/
+.claude/
+consensus/spec/states/
+*.tlaps/
