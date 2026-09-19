@@ -30,12 +30,51 @@ is controlled; amoxicillin conflicts with a documented penicillin
 anaphylaxis). The invariant is not "always right". It is: the kernel may
 escalate to a human, and it may never return a confident wrong verdict.
 
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> Consulting
+    Consulting --> Consulting : unstable vote, budget left
+    Consulting --> Decided : ≥3 stable votes agree
+    Consulting --> Escalated : budget spent, no stable quorum
+    Decided --> [*]
+    Escalated --> [*]
+
+    note right of Decided
+        DecisionIsReproducible:
+        every supporting vote is stable.
+        TLC, 5 agents / quorum 3 / 2 crashes:
+        1,049,750 distinct states, 0 errors
+    end note
+```
+
 ## What Jev makes possible
 
 Jev (TypeSafe's System One model) returns a calibrated probability, not
 prose. That one property is what lets a model's judgment be treated as a
 signal with a measurable noise floor: gate on it, replay it, and prove things
 about the protocol wrapped around it.
+
+```mermaid
+flowchart TB
+    rec["Prescription record"]
+    kernel["<b>jev-labs consensus kernel</b><br/>5 agents · stability gate · quorum 3 of 5"]
+    jev[("<b>Jev · System One</b><br/>TypeSafe, external<br/>returns a probability")]
+    rx(["Pharmacist"])
+    ops(["Operator"])
+
+    rec --> kernel
+    kernel -- "5 paraphrased questions" --> jev
+    jev -- "5 calibrated probabilities" --> kernel
+    kernel -- "decide Yes / No" --> out["Order proceeds"]
+    kernel -- "ESCALATE" --> rx
+    kernel -- "telemetry, request ids, seed" --> ops
+
+    classDef dark fill:#141414,stroke:#141414,color:#fbfbf9
+    classDef warn fill:#fff4f0,stroke:#d4410c,color:#d4410c
+    class kernel dark
+    class rx warn
+```
 
 Measured over 1,490 hash-verified calls to `jev-1.13.0`:
 
@@ -48,10 +87,34 @@ Measured over 1,490 hash-verified calls to `jev-1.13.0`:
 
 ## What we built
 
-```
-TLA+ spec  ->  AsyncAPI contract  ->  Rust kernel  ->  Jev (behind one trait)
- 4 specs        derived from the       generated types,     consult(agent, q, state)
- 11 configs     spec, validated        coordinator, tests      -> Judgment
+```mermaid
+flowchart TB
+    subgraph chain["Verification chain — each stage gates the next"]
+        tla["<b>TLA+ specs</b><br/>4 modules · 11 configs<br/>quorum bound derived by sweep"]
+        api["<b>AsyncAPI contract</b><br/>every field traced to a spec variable"]
+        rust["<b>Rust kernel</b><br/>types generated from the contract<br/>48 tests · TLC traces replayed"]
+        tla --> api --> rust
+    end
+
+    subgraph runtime["Runtime"]
+        sim["<b>pharmacy_sim</b><br/>14 scenarios · seeded chaos"]
+        coord["<b>Coordinator</b><br/>5 agents · gate · quorum"]
+        oracle["<b>trait Oracle</b><br/>consult(agent, q, state) → Judgment"]
+        sim --> coord --> oracle
+    end
+
+    jev[("<b>Jev</b>")]
+    db[("<b>forensics.db</b><br/>1,490 calls · verbatim · SHA-256")]
+    tele[("<b>sim_*.jsonl</b><br/>1,680 rounds · 5,007 votes")]
+    film["<b>story/</b><br/>film built from the data"]
+
+    rust --> sim
+    oracle --> jev
+    oracle --> db
+    coord --> tele --> film
+
+    classDef dark fill:#141414,stroke:#141414,color:#fbfbf9
+    class coord dark
 ```
 
 - `consensus/spec/` — four TLA+ modules. The quorum bound was derived, not
@@ -70,6 +133,36 @@ identity floor and escalate under the cohort floor (`calibration_choice_changes_
 ## The simulation
 
 `cargo run --release --example pharmacy_sim -- --seeds 40 --chaos severe`
+
+```mermaid
+flowchart TB
+    seed["seed"] --> co["<b>ChaosOracle</b><br/>deterministic fault schedule"]
+    co --> inj["inject adversarial text"]
+    co --> tr["truncate record"]
+    co --> cr["crash agent"]
+    co --> rl["rate limit"]
+    co --> tx["transport error"]
+    inj & tr & cr & rl & tx --> o["trait Oracle"] --> jev[("Jev")]
+```
+
+One round, inside the coordinator:
+
+```mermaid
+flowchart TB
+    rec["record"] --> fan["<b>fan out</b><br/>rx1 … rx5, one paraphrase each"]
+    fan --> jev[("Jev")]
+    jev --> gate{"margin > 0.042 ?<br/>measured noise floor"}
+    gate -- "no · unstable" --> retry["re-ask, budget 2"]
+    retry --> jev
+    gate -- "yes · stable" --> q{"3 stable votes agree ?"}
+    q -- "yes" --> decide["<b>DECIDE</b>"]
+    q -- "no, budget spent" --> esc["<b>ESCALATE</b>"]
+
+    classDef dark fill:#141414,stroke:#141414,color:#fbfbf9
+    classDef warn fill:#fff4f0,stroke:#d4410c,color:#d4410c
+    class decide dark
+    class esc warn
+```
 
 Fourteen scenarios in three tiers (golden, nuanced, ambiguous), five agents
 each asking a validated paraphrase of the question, seeded chaos: adversarial
