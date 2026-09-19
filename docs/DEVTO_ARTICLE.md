@@ -1,8 +1,8 @@
 ---
-title: "Never Confidently Wrong: I Put a Formal Spec Around a Probabilistic Oracle and Tried to Break It"
+title: "I Put Jev Behind a TLA+ Spec and Ran 1,680 Chaos-Tested Pharmacy Decisions. Zero Wrong Verdicts."
 published: false
-description: "1,680 chaos-tested pharmacy decisions against TypeSafe's Jev. Zero wrong verdicts. Two of the bugs were mine."
-tags: ai, rust, testing, distributedsystems
+description: "Jev returns a probability, not prose. That made it possible to model-check the consensus around it, then try to break it. Two of the bugs were mine."
+tags: jev, ai, rust, testing
 cover_image: https://raw.githubusercontent.com/copyleftdev/jev-labs/main/assets/article/cover-1000x420.png
 canonical_url: https://github.com/copyleftdev/jev-labs
 series: Sources Under Challenge
