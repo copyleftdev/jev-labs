@@ -173,7 +173,7 @@
   },
   "_forensics": {
     "run_id": "run_16fcc5135afb4865",
-    "db_path": "/home/ops/Project/jev-labs/forensics.db",
+    "db_path": "forensics.db",
     "integrity": {
       "checked": 39,
       "mismatches": [],
